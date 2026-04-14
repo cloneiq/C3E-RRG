@@ -1,0 +1,69 @@
+{
+  "data": {
+    "dataset_name": "mimic_cxr",
+    "image_dir": "data/mimic_cxr/images",
+    "ann_path": "data/mimic_cxr/annotation.json",
+    "tokenizer": "mix",
+    "max_seq_length": 80,
+    "threshold": 10,
+    "num_workers": 2,
+    "batch_size": 16
+  },
+  "model": {
+    "model": "baseline",
+    "embed_dim": 512,
+    "num_heads": 8,
+    "en_num_layers": 6,
+    "de_num_layers": 6,
+    "ff_dim": 2048,
+    "dropout": 0.1,
+    "logit_layers": 1
+  },
+  "sample": {
+    "sample_method": "beam_search",
+    "beam_size": 3,
+    "group_size": 1,
+    "sample_n": 1,
+    "temperature": 1.0,
+    "diversity_lambda": 0.0,
+    "length_penalty": "",
+    "decoding_constraint": 0,
+    "suppress_UNK": 0,
+    "output_logsoftmax": 1,
+    "bos_idx": 0,
+    "eos_idx": 0,
+    "pad_idx": 0
+  },
+  "train": {
+    "epochs": 40,
+    "save_period": 1,
+    "monitor_mode": "max",
+    "monitor_metric": "BLEU_4",
+    "early_stop": 40,
+    "result_dir": "results/mimic_cxr/baseline",
+    "record_dir": "records/mimic_cxr/baseline"
+  },
+  "optim": {
+    "loss_fn": "lm",
+    "optim": "Adam",
+    "lr_en": 1e-5,
+    "lr_de": 1e-5,
+    "weight_decay": 5e-5,
+    "amsgrad": true,
+    "lr_scheduler": "StepLR",
+    "step_size": 50,
+    "gamma": 0.1
+  },
+  "monitor": {
+    "monitor_metric_curves": false,
+    "display_port": 8099
+  },
+  "other": {
+    "task_name": "finetune_baseline_mimic",
+    "seed": 1234,
+    "cuda": 0,
+    "task": "inference",
+    "resume": "",
+    "load_model_path": "results/mimic_cxr/baseline/model_best.pth"
+  }
+}
