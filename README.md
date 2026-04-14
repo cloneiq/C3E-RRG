@@ -17,7 +17,7 @@ C3E-RRG/
 │   │   └── iu_dymes.json
 │   └── mimic_cxr/
 │       └── baseline.json
-││      └── mimic_dymes.json
+│       └── mimic_dymes.json
 ├── models/ # Model architectures
 │   ├── __init__.py
 │   ├── baseline.py
