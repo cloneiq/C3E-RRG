@@ -5,99 +5,102 @@ This codebase includes confounder proxy representation learning, an evidence-con
 It provides the implementation of the C3E-RRG model (DYMES) and supports training and fine-tuning on the MIMIC-CXR and IU X-Ray datasets.
 The CheXpert labeler code is available at https://github.com/stanfordmlgroup/chexpert-labeler.
 # C3E-RRG: Confounder-Aware Causal Evidence Coupling and Evolution for Chest X-Ray Report Generation
+
 ## Project Structure
 The code structure of our C3E-RRG is organized as follows:
+
+```text
 C3E-RRG/
 ├── config/ # Configuration files for datasets
-│ ├── iu_xray/
-│ │ ├── vlci.json
-│ │ └── iu_dymes.json
-│ └── mimic_cxr/
-│ └── vici.json
+│   ├── iu_xray/
+│   │   ├── vlci.json
+│   │   └── iu_dymes.json
+│   └── mimic_cxr/
+│       └── vici.json
 │
 ├── models/ # Model architectures
-│ ├── init.py
-│ ├── baseline.py
-│ └── dymes.py # Our proposed C3E-RRG model
+│   ├── __init__.py
+│   ├── baseline.py
+│   └── dymes.py # Our proposed C3E-RRG model
 │
 ├── modules/ # Core network modules
-│ ├── init.py
-│ ├── beam_search.py
-│ ├── coatnet.py
-│ ├── misc.py
-│ ├── modules4transformer.py
-│ ├── feature_disentanglement/ # Visual feature extraction (CMCRL)
-│ ├── modules4vlp.py
-│ ├── pos_embed.py
-│ ├── bidirectional_evolution.py
-│ ├── causal_entanglement.py
-│ ├── causal_hollow_index.py
-│ └── confounder_modeling.py
+│   ├── __init__.py
+│   ├── beam_search.py
+│   ├── coatnet.py
+│   ├── misc.py
+│   ├── modules4transformer.py
+│   ├── feature_disentanglement/ # Visual feature extraction (CMCRL)
+│   ├── modules4vlp.py
+│   ├── pos_embed.py
+│   ├── bidirectional_evolution.py
+│   ├── causal_entanglement.py
+│   ├── causal_hollow_index.py
+│   └── confounder_modeling.py
 │
 ├── data/ # Dataset processing
-│ ├── datadownloader.py
-│ ├── iu_xray/
-│ └── mimic-cxr/
+│   ├── datadownloader.py
+│   ├── iu_xray/
+│   └── mimic-cxr/
 │
 ├── metric/ # Evaluation metrics
-│ ├── bleu/
-│ ├── cider/
-│ ├── meteor/
-│ ├── rouge/
-│ ├── metrics.py
-│ ├── init.py
-│ └── eval.py
+│   ├── bleu/
+│   ├── cider/
+│   ├── meteor/
+│   ├── rouge/
+│   ├── metrics.py
+│   ├── __init__.py
+│   └── eval.py
 │
 ├── trainer/ # Training pipelines
-│ ├── init.py
-│ ├── BaseTrainer.py
-│ ├── PretrainTrainer.py
-│ └── FinetuneTrainer.py
+│   ├── __init__.py
+│   ├── BaseTrainer.py
+│   ├── PretrainTrainer.py
+│   └── FinetuneTrainer.py
 │
 ├── utils/ # Utility functions
-│ ├── init.py
-│ ├── cvt_im_tensor.py
-│ ├── dataloaders.py
-│ ├── dataset.py
-│ ├── html_utils.py
-│ ├── loss.py
-│ ├── optimizers.py
-│ ├── tensor_utils.py
-│ ├── monitor.py
-│ ├── tokenizers_utils.py
-│ └── vis_utils.py # Visualization tools
+│   ├── __init__.py
+│   ├── cvt_im_tensor.py
+│   ├── dataloaders.py
+│   ├── dataset.py
+│   ├── html_utils.py
+│   ├── loss.py
+│   ├── optimizers.py
+│   ├── tensor_utils.py
+│   ├── monitor.py
+│   ├── tokenizers_utils.py
+│   └── vis_utils.py # Visualization tools
 │
 ├── tools/ # Preprocessing tools
-│ ├── normal_template/ # Normal template construction
-│ ├── build_disease_corr.py # Disease co-occurrence matrix
-│ └── build_pmi_matrix.py # Language prior matrix
+│   ├── normal_template/ # Normal template construction
+│   ├── build_disease_corr.py # Disease co-occurrence matrix
+│   └── build_pmi_matrix.py # Language prior matrix
 │
 ├── pretrain/ # Pre-trained files & matrices
-│ ├── iu_xray/
-│ │ ├── disease_corr_iu_xray.npy
-│ │ ├── pmi_matrix_iu_xray.pt
-│ │ └── normal_template_iu_xray.npy
-│ ├── mimic_cxr/
-│ │ ├── disease_corr_mimic_cxr.npy
-│ │ ├── pmi_matrix_mimic_cxr.pt
-│ │ └── normal_template_mimic_cxr.npy
-│ ├── unet_resnet_medical.pth
-│ └── vit_base_patch16_224_in21k.pth
+│   ├── iu_xray/
+│   │   ├── disease_corr_iu_xray.npy
+│   │   ├── pmi_matrix_iu_xray.pt
+│   │   └── normal_template_iu_xray.npy
+│   ├── mimic_cxr/
+│   │   ├── disease_corr_mimic_cxr.npy
+│   │   ├── pmi_matrix_mimic_cxr.pt
+│   │   └── normal_template_mimic_cxr.npy
+│   ├── unet_resnet_medical.pth
+│   └── vit_base_patch16_224_in21k.pth
 │
 ├── results/ # Experimental results
-│ ├── iu_xray/
-│ └── mimic_cxr/
+│   ├── iu_xray/
+│   └── mimic_cxr/
 │
 ├── records/ # Logs and records
-│ ├── license.txt
-│ └── log.txt
+│   ├── license.txt
+│   └── log.txt
 │
 ├── main.py # Main entry
 ├── requirements.yaml # Environment dependencies
 ├── README.md
 └── .gitignore
 <div align=center>
-
+```
 <img src="C3E-RRG.png" alt="图片替换文本" width="1024" />
 
 </div>
