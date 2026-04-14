@@ -1,6 +1,6 @@
 # C3E-RRG
 
-This is the implementation of [C3E-RRG:Confounder-Aware Causal Evidence Coupling and Evolution for Chest X-Ray Report Generation].
+This is the implementation of [C3E-RRG:Confounder-Aware Causal Evidence Coupling and Evolution for Chest X-Ray Report Generation](...).
 This codebase includes confounder proxy representation learning, an evidence-consistent coupling module (i.e., the causal entanglement module), and a dynamic bidirectional causal evolution module. 
 It provides the implementation of the C3E-RRG model (DYMES) and supports training and fine-tuning on the MIMIC-CXR and IU X-Ray datasets.
 The CheXpert labeler code is available at https://github.com/stanfordmlgroup/chexpert-labeler.
@@ -13,11 +13,11 @@ The code structure of our C3E-RRG is organized as follows:
 C3E-RRG/
 ├── config/ # Configuration files for datasets
 │   ├── iu_xray/
-│   │   ├── vlci.json
+│   │   ├── baseline.json
 │   │   └── iu_dymes.json
 │   └── mimic_cxr/
-│       └── vici.json
-│
+│       └── baseline.json
+││      └── mimic_dymes.json
 ├── models/ # Model architectures
 │   ├── __init__.py
 │   ├── baseline.py
@@ -84,16 +84,10 @@ C3E-RRG/
 │   │   ├── disease_corr_mimic_cxr.npy
 │   │   ├── pmi_matrix_mimic_cxr.pt
 │   │   └── normal_template_mimic_cxr.npy
-│   ├── unet_resnet_medical.pth
-│   └── vit_base_patch16_224_in21k.pth
 │
 ├── results/ # Experimental results
 │   ├── iu_xray/
 │   └── mimic_cxr/
-│
-├── records/ # Logs and records
-│   ├── license.txt
-│   └── log.txt
 │
 ├── main.py # Main entry
 ├── requirements.yaml # Environment dependencies
