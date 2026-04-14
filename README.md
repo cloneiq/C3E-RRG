@@ -182,7 +182,7 @@ If you use this code for your research, please cite our paper.
 
 ## Contact
 First Author: Sha Yang, Kunming University of Science and Technology Kunming, Yunnan CHINA, email: 746498201@qq.com
-Corresponding Author: Lijun Liu, Ph.D., Kunming University of Science and Technology Kunming, Yunnan CHINA, email: cloneiq@kust.edu.cn
 
+Corresponding Author: Lijun Liu, Ph.D., Kunming University of Science and Technology Kunming, Yunnan CHINA, email: cloneiq@kust.edu.cn
 ## Acknowledges
 We thank [R2Gen](https://github.com/cuhksz-nlp/R2Gen) and [CMCRL](https://github.com/WissingChen/CMCRL )for their open source works.
