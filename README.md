@@ -93,7 +93,6 @@ C3E-RRG/
 ├── requirements.yaml # Environment dependencies
 ├── README.md
 └── .gitignore
-<div align=center>
 ```
 <img src="C3E-RRG.png" alt="图片替换文本" width="1024" />
 
