@@ -1,11 +1,8 @@
-# C3E-RRG
-
+# C3E-RRG: Confounder-Aware Causal Evidence Coupling and Evolution for Chest X-Ray Report Generation
 This is the implementation of [C3E-RRG:Confounder-Aware Causal Evidence Coupling and Evolution for Chest X-Ray Report Generation](...).
 This codebase includes confounder proxy representation learning, an evidence-consistent coupling module (i.e., the causal entanglement module), and a dynamic bidirectional causal evolution module. 
 It provides the implementation of the C3E-RRG model (DYMES) and supports training and fine-tuning on the MIMIC-CXR and IU X-Ray datasets.
 The CheXpert labeler code is available at https://github.com/stanfordmlgroup/chexpert-labeler.
-# C3E-RRG: Confounder-Aware Causal Evidence Coupling and Evolution for Chest X-Ray Report Generation
-
 ## Project Structure
 The code structure of our C3E-RRG is organized as follows:
 
