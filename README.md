@@ -107,8 +107,7 @@ conda activate mrg
 1. Datasets: 
 You can download the dataset via `data/datadownloader.py`, or download from the repo of [R2Gen](https://github.com/cuhksz-nlp/R2Gen).
 Then, unzip the files into `data/iu_xray` and `data/mimic_cxr`, respectively. 
-2. Models: We provide the well-trained models and metrics of C3E-RRG for inference, and you can download from [here](My C3E-RRG
- https://pan.baidu.com/s/19MLWLorCIGLi6uSOf8lZWQ?pwd=6688).
+2. Models: We provide the well-trained models and metrics of C3E-RRG for inference, and you can download from [C3E-RRG]( https://pan.baidu.com/s/19MLWLorCIGLi6uSOf8lZWQ?pwd=6688).
 3. Please remember to change the path of data and models in the config file (`config/*.json`).
 
 ## Evaluation
