@@ -1,32 +1,110 @@
-# C3E-RRG: Confounder-Aware Causal Evidence Coupling and Evolution for Chest X-Ray Report Generation
-This is the implementation of **C3E-RRG:Confounder-Aware Causal Evidence Coupling and Evolution for Chest X-Ray Report Generation**.
-This codebase includes confounder proxy representation learning, an evidence-consistent coupling module (i.e., the causal entanglement module), and a dynamic bidirectional causal evolution module. 
-It provides the implementation of the C3E-RRG model (DYMES) and supports training and fine-tuning on the MIMIC-CXR and IU X-Ray datasets.
-The CheXpert labeler code is available at https://github.com/stanfordmlgroup/chexpert-labeler.
+<p align="center">
+  <img src="c3e-rrg-sig.svg" alt="C3E-RRG Banner" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/cloneiq/C3E-RRG/stargazers">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/cloneiq/C3E-RRG?style=social">
+  </a>
+  <a href="https://github.com/cloneiq/C3E-RRG/commits/main">
+    <img alt="Last commit" src="https://img.shields.io/github/last-commit/cloneiq/C3E-RRG?color=7c3aed">
+  </a>
+  <a href="https://github.com/cloneiq/C3E-RRG">
+    <img alt="Repo size" src="https://img.shields.io/github/repo-size/cloneiq/C3E-RRG?color=64748b">
+  </a>
+  <a href="#requirements">
+    <img alt="Environment" src="https://img.shields.io/badge/environment-conda-green">
+  </a>
+  <a href="#evaluation">
+    <img alt="Task" src="https://img.shields.io/badge/task-Chest%20X--Ray%20Report%20Generation-blue">
+  </a>
+</p>
+
+<p align="center">
+  <b>Official implementation of C3E-RRG</b><br>
+  Confounder-Aware Causal Evidence Coupling · Dynamic Bidirectional Causal Evolution · Chest X-Ray Report Generation
+</p>
+
+# Overview
+
+**C3E-RRG** is the official implementation of:
+
+> **C3E-RRG: Confounder-Aware Causal Evidence Coupling and Evolution for Chest X-Ray Report Generation**
+
+This codebase includes **confounder proxy representation learning**, an **evidence-consistent coupling module** (i.e., the causal entanglement module), and a **dynamic bidirectional causal evolution module**. It provides the implementation of the **C3E-RRG model (DYMES)** and supports training and fine-tuning on the **MIMIC-CXR** and **IU X-Ray** datasets. 
+
+<p align="center">
+  <img src="C3E-RRG.png" alt="C3E-RRG framework" width="1024" />
+</p>
+
+<p align="center">
+  <sub>Overall architecture of C3E-RRG.</sub>
+</p>
+
+The CheXpert labeler code is available at:
+
+<p align="center">
+  <a href="https://github.com/stanfordmlgroup/chexpert-labeler">
+    <b>https://github.com/stanfordmlgroup/chexpert-labeler</b>
+  </a>
+</p>
+
+The source code is publicly available at:
+
+<p align="center">
+  <a href="https://github.com/cloneiq/C3E-RRG">
+    <b>https://github.com/cloneiq/C3E-RRG</b>
+  </a>
+</p>
+## Quick Start
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/cloneiq/C3E-RRG.git
+cd C3E-RRG
+```
+
+### Install Requirements
+
+```bash
+conda env create -f requirements.yaml
+conda activate mrg
+```
+
+### Prepare Datasets and Models
+
+Prepare the datasets, well-trained models, and configuration paths according to the instructions in [Preparation](#preparation).
+
+### Evaluation
+
+Run the evaluation scripts as described in [Evaluation](#evaluation).
+
 ## Project Structure
+
 The code structure of our C3E-RRG is organized as follows:
 
 ```text
 C3E-RRG/
-├── config/ # Configuration files for datasets
+├── config/                         # Configuration files for datasets
 │   ├── iu_xray/
 │   │   ├── baseline.json
 │   │   └── iu_dymes.json
 │   └── mimic_cxr/
-│       └── baseline.json
+│       ├── baseline.json
 │       └── mimic_dymes.json
-├── models/ # Model architectures
+├── models/                         # Model architectures
 │   ├── __init__.py
 │   ├── baseline.py
-│   └── dymes.py # Our proposed C3E-RRG model
+│   └── dymes.py                    # Our proposed C3E-RRG model
 │
-├── modules/ # Core network modules
+├── modules/                        # Core network modules
 │   ├── __init__.py
 │   ├── beam_search.py
 │   ├── coatnet.py
 │   ├── misc.py
 │   ├── modules4transformer.py
-│   ├── feature_disentanglement/ # Visual feature extraction (CMCRL)
+│   ├── feature_disentanglement/     # Visual feature extraction (CMCRL)
 │   ├── modules4vlp.py
 │   ├── pos_embed.py
 │   ├── bidirectional_evolution.py
@@ -34,12 +112,12 @@ C3E-RRG/
 │   ├── causal_hollow_index.py
 │   └── confounder_modeling.py
 │
-├── data/ # Dataset processing
+├── data/                           # Dataset processing
 │   ├── datadownloader.py
 │   ├── iu_xray/
 │   └── mimic-cxr/
 │
-├── metric/ # Evaluation metrics
+├── metric/                         # Evaluation metrics
 │   ├── bleu/
 │   ├── cider/
 │   ├── meteor/
@@ -48,13 +126,13 @@ C3E-RRG/
 │   ├── __init__.py
 │   └── eval.py
 │
-├── trainer/ # Training pipelines
+├── trainer/                        # Training pipelines
 │   ├── __init__.py
 │   ├── BaseTrainer.py
 │   ├── PretrainTrainer.py
 │   └── FinetuneTrainer.py
 │
-├── utils/ # Utility functions
+├── utils/                          # Utility functions
 │   ├── __init__.py
 │   ├── cvt_im_tensor.py
 │   ├── dataloaders.py
@@ -65,59 +143,72 @@ C3E-RRG/
 │   ├── tensor_utils.py
 │   ├── monitor.py
 │   ├── tokenizers_utils.py
-│   └── vis_utils.py # Visualization tools
+│   └── vis_utils.py                # Visualization tools
 │
-├── tools/ # Preprocessing tools
-│   ├── normal_template/ # Normal template construction
-│   ├── build_disease_corr.py # Disease co-occurrence matrix
-│   └── build_pmi_matrix.py # Language prior matrix
+├── tools/                          # Preprocessing tools
+│   ├── normal_template/             # Normal template construction
+│   ├── build_disease_corr.py        # Disease co-occurrence matrix
+│   └── build_pmi_matrix.py          # Language prior matrix
 │
-├── pretrain/ # Pre-trained files & matrices
+├── pretrain/                       # Pre-trained files & matrices
 │   ├── iu_xray/
 │   │   ├── disease_corr_iu_xray.npy
 │   │   ├── pmi_matrix_iu_xray.pt
 │   │   └── normal_template_iu_xray.npy
-│   ├── mimic_cxr/
-│   │   ├── disease_corr_mimic_cxr.npy
-│   │   ├── pmi_matrix_mimic_cxr.pt
-│   │   └── normal_template_mimic_cxr.npy
+│   └── mimic_cxr/
+│       ├── disease_corr_mimic_cxr.npy
+│       ├── pmi_matrix_mimic_cxr.pt
+│       └── normal_template_mimic_cxr.npy
 │
-├── results/ # Experimental results
+├── results/                        # Experimental results
 │   ├── iu_xray/
 │   └── mimic_cxr/
 │
-├── main.py # Main entry
-├── requirements.yaml # Environment dependencies
+├── main.py                         # Main entry
+├── requirements.yaml               # Environment dependencies
 ├── README.md
 └── .gitignore
 ```
-<img src="C3E-RRG.png" alt="图片替换文本" width="1024" />
-
-</div>
 
 ## Requirements
-All the requirements are listed in the requirements.yaml file. Please use this command to create a new environment and activate it.
 
-```
+All the requirements are listed in the `requirements.yaml` file. Please use this command to create a new environment and activate it.
+
+```bash
 conda env create -f requirements.yaml
 conda activate mrg
 ```
 
 ## Preparation
-1. Datasets: 
+
+### Datasets
+
 You can download the dataset via `data/datadownloader.py`, or download from the repo of [R2Gen](https://github.com/cuhksz-nlp/R2Gen).
-Then, unzip the files into `data/iu_xray` and `data/mimic_cxr`, respectively. 
-2. Models: We provide the well-trained models and metrics of C3E-RRG for inference, and you can download from [C3E-RRG]( https://pan.baidu.com/s/19MLWLorCIGLi6uSOf8lZWQ?pwd=6688).
-3. Please remember to change the path of data and models in the config file (`config/*.json`).
+
+Then, unzip the files into `data/iu_xray` and `data/mimic_cxr`, respectively.
+
+### Models
+
+We provide the well-trained models and metrics of C3E-RRG for inference, and you can download from:
+
+- [C3E-RRG](https://pan.baidu.com/s/19MLWLorCIGLi6uSOf8lZWQ?pwd=6688)
+
+### Config Files
+
+Please remember to change the path of data and models in the config file:
+
+```text
+config/*.json
+```
 
 ## Evaluation
-- For C3E-RRG on IU-Xray dataset 
 
-```
+### For C3E-RRG on IU-Xray Dataset
+
+```bash
 python main.py -c config/iu_xray/iu_dymes.json
 ```
 
-<div align=center>
 
 | Method | Year | B@1 | B@2 | B@3 | B@4 | M | R |
 |:------:|:----:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -137,14 +228,12 @@ python main.py -c config/iu_xray/iu_dymes.json
 | **C3E-RRG (Ours)** | 2026 | **0.513** | **0.348** | **0.256** | **0.195** | **0.211** | **0.407** |
 | ± Std | - | 0.0015 | 0.0019 | 0.0017 | 0.0013 | 0.0079 | 0.0019 |
 
-</div>
+### For C3E-RRG on MIMIC-CXR Dataset
 
-- For C3E-RRG on MIMIC-CXR dataset
-
-```
+```bash
 python main.py -c config/mimic_cxr/mimic_dymes.json
 ```
-<div align=center>
+
 
 | Method | Year | B@1 | B@2 | B@3 | B@4 | M | R | P | Rec | F1 |
 |:------:|:----:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -164,14 +253,21 @@ python main.py -c config/mimic_cxr/mimic_dymes.json
 | **C3E-RRG (Ours)** | 2026 | **0.411** | **0.251** | **0.165** | **0.115** | 0.151 | 0.280 | **0.520** | 0.350 | **0.420** |
 | ± Std | - | 0.0013 | 0.0016 | 0.0005 | 0.0012 | 0.0023 | 0.0025 | - | - | - |
 
-</div>
-
 ## Citation
+
 If you use this code for your research, please cite our paper.
 
 ## Contact
-First Author: Sha Yang, Kunming University of Science and Technology Kunming, Yunnan CHINA, email: 746498201@qq.com
 
-Corresponding Author: Lijun Liu, Ph.D., Kunming University of Science and Technology Kunming, Yunnan CHINA, email: cloneiq@kust.edu.cn
+**First Author**: Sha Yang, Kunming University of Science and Technology Kunming, Yunnan CHINA, email: 746498201@qq.com
+
+**Corresponding Author**: Lijun Liu, Associate Professor (Ph.D.), Kunming University of Science and Technology Kunming, Yunnan CHINA, email: cloneiq@kust.edu.cn
+
 ## Acknowledges
-We thank [R2Gen](https://github.com/cuhksz-nlp/R2Gen) and [CMCRL](https://github.com/WissingChen/CMCRL )for their open source works.
+
+- We thank [R2Gen](https://github.com/cuhksz-nlp/R2Gen), the implementation of *Generating Radiology Reports via Memory-driven Transformer*, for providing a widely used baseline and dataset preparation reference for radiology report generation.
+- We thank [CMCRL](https://github.com/WissingChen/CMCRL), the implementation of *Cross-Modal Causal Intervention / Cross-Modal Causal Representation Learning for Medical Report Generation*, for providing valuable causal modeling and cross-modal alignment references for radiology report generation.
+
+<p align="center">
+  <sub>Maintained for causal, evidence-consistent, and robust chest X-ray report generation research.</sub>
+</p>
