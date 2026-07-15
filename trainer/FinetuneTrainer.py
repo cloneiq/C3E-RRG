@@ -202,18 +202,9 @@ class Trainer(BaseTrainer):
                 if not force_write:
                     self._best_score = cur_val
                 # 1) 写测试集预测文本（覆盖写）
-                # pred_csv = os.path.join(self.args["result_dir"], "predictions_test.csv")
-                # pd.DataFrame({"Report Impression": test_res}).to_csv(pred_csv, index=False)
-                pred_csv = os.path.join(self.args["result_dir"], "predictions_test_with_id.csv")
-                pd.DataFrame({
-                    "subject_id": test_subject_ids,
-                    "study_id": test_study_ids,
-                    "Report Impression": test_res,
-                    # 可选：把 GT 一起存，方便排查/CE
-                    "GT": test_gts,
-                }).to_csv(pred_csv, index=False)
-                print(f"[OK] saved: {pred_csv}")
-
+                pred_csv = os.path.join(self.args["result_dir"], "predictions_test.csv")
+                pd.DataFrame({"Report Impression": test_res}).to_csv(pred_csv, index=False)
+                
                 # 2) 写唯一一行指标到 <dataset>.csv（覆盖写）
                 ds_name = self.args.get("dataset_name", "dataset")
                 met_csv = os.path.join(self.args["result_dir"], f"{ds_name}.csv")
@@ -434,22 +425,3 @@ def decoder_heatmap(img, attn):
         mask += attn_map
         output = unpatchify(mask)
     return output
-
-def save_report(inference, reference, ids, output_csv):
-    import pandas as pd
-    sub_ids, stu_ids = [], []
-    for x in ids:
-        if isinstance(x, (list, tuple)) and len(x) == 2:
-            sub_ids.append(int(x[0]))
-            stu_ids.append(int(x[1]))
-        else:
-            sub_ids.append(-1)
-            stu_ids.append(-1)
-
-    df = pd.DataFrame({
-        "subject_id": sub_ids,
-        "study_id": stu_ids,
-        "pred_report": inference,
-        "gt_report": reference
-    })
-    df.to_csv(output_csv, index=False)
