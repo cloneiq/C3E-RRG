@@ -267,18 +267,6 @@ class Trainer(BaseTrainer):
                                         {i: [re] for i, re in enumerate(test_res)})
             log.update(**{'test_' + k: v for k, v in test_met.items()})
 
-            # <<<<<< 新增：保存要的 report.csv
-            assert len(sub_ids) == len(test_res) == len(test_gts), \
-                f"Length mismatch: sub={len(sub_ids)}, pred={len(test_res)}, gt={len(test_gts)}"
-            out_csv = os.path.join(self.args["result_dir"], "report.csv")
-            pd.DataFrame({
-                "subject_id": sub_ids,
-                "study_id": stu_ids,
-                "pred_report": test_res,
-                "gt_report": test_gts
-            }).to_csv(out_csv, index=False)
-            print(f"\n[OK] saved report: {out_csv}")
-
         record_path = os.path.join(self.args["record_dir"], self.args["dataset_name"] + '.csv')
         record_table = pd.DataFrame()
         record_table = pd.concat([record_table, pd.DataFrame([log])], ignore_index=True)
