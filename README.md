@@ -41,7 +41,7 @@ This codebase includes **confounder proxy representation learning**, an **eviden
   Fig.1 Overall architecture of C3E-RRG.
 </p>
 
-The CheXpert labeler code is available at: <a href="https://github.com/stanfordmlgroup/chexpert-labeler">
+The CheXpert labeler code is available at: <a href="https://github.com/stanfordmlgroup/CheXbert">
     <b>https://github.com/stanfordmlgroup/chexpert-labeler</b>
   </a>
 
