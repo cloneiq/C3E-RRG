@@ -278,7 +278,3 @@ Lijun Liu, Associate Professor (Ph.D.), Kunming University of Science and Techno
 
 - We thank [R2Gen](https://github.com/cuhksz-nlp/R2Gen), the implementation of *Generating Radiology Reports via Memory-driven Transformer*, for providing a widely used baseline and dataset preparation reference for radiology report generation.
 - We thank [CMCRL](https://github.com/WissingChen/CMCRL), the implementation of *Cross-Modal Causal Intervention / Cross-Modal Causal Representation Learning for Medical Report Generation*, for providing valuable causal modeling and cross-modal alignment references for radiology report generation.
-
-<p align="center">
-  <sub>Maintained for causal, evidence-consistent, and robust chest X-ray report generation research.</sub>
-</p>
